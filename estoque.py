@@ -1,31 +1,7 @@
-# SQLALCHEMY
-
-# create_engine permite a criacao das tabelas com base no codigo python
-from sqlalchemy import create_engine
-from sqlalchemy import Column, Integer, String
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy.ext.declarative import declarative_base
+import conecta
+from conecta import session, Produto
 
 
-engine = create_engine('sqlite:///banco.db')
-Base = declarative_base()
-
-Session = sessionmaker()
-Session.configure(bind=engine)
-session = Session()
-
-# Criacao das tabelas
-class Produto(Base):
-    __tablename__ = 'produtos'
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    nome = Column(String, nullable=False, unique=True )
-    descricao = Column(String)
-    quantidade = Column(Integer)
-
-"""
-if __name__ ==  '__main__':
-    Base.metadata.create_all(engine)
-"""
 def menu():
     option = None
     while(option == None):
@@ -60,6 +36,7 @@ def menu():
             user = session.query(Produto).filter(Produto.id==int(ide)).first()
             if(user):
                 print("INformacoes do produto: \n")
+                print("ID: {0}".format(user.id))
                 print("NOme: {0}".format(user.nome))
                 print("Descricao: {0}".format(user.descricao))
                 print("Quantidade: {0}".format(user.quantidade))
@@ -74,7 +51,7 @@ def menu():
             if(user):
                 user.nome = raw_input("Informe um nome:") or user.nome
                 user.descricao = raw_input("Informe a descricao:") or user.descricao
-                user.quantidade = int(raw_input("Informe a quantidade:")) or user.quantidade
+                user.quantidade = int(raw_input("Informe a quantidade:") or user.quantidade)
                 session.commit()
                 print("Atualizacao feita com sucesso")
         except Exception as e:
@@ -96,7 +73,8 @@ def menu():
         try:
             produtos = session.query(Produto).all()
             for i in produtos:
-                print("\n Nome: {0}".format(i.nome))
+                print("\n Id: {0}".format(i.id)) 
+                print("Nome: {0}".format(i.nome))
                 print("Descricao: {0}".format(i.descricao))
                 print("Quantidade: {0}".format(i.quantidade))
         except Exception as e:
@@ -104,7 +82,8 @@ def menu():
         menu()
     elif (option == "6"):
         print("BYE!!!")
-
+    else:
+        menu()
 menu()
 
 
