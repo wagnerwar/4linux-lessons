@@ -1,0 +1,14 @@
+"""
+alembic e um complemento que permite que se faca atualizacoes na estrutura do banco de dados, de forma controlada pela aplicacao
+
+pip install alembic
+alembic init
+"""
+
+alembic revision --autogenerate -m "Criacao da tabela categoria" -- Geracao de script de atualizacao de estrutura, com base nas alteracoes do SQLAlchemy
+
+alembic upgrade +1 -- pegar o ultimo arquivo de versionamento, e aplica as alteracoes
+
+alembic downgrade -1 -- Desfazer a ultima alteracao
+
+ 
