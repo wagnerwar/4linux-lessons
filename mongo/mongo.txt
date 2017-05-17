@@ -1,0 +1,26 @@
+# Explicacao acerca de mongodb
+
+use DATABASE
+
+show databases
+
+show tables
+
+show collections
+
+
+db.COLECAO.find() -- Lista todo o conteudo da colecao
+
+db.COLECAO.insert({ "PROPRIEDADE": "VALOR" })
+
+Nao tem estrutura rigida
+
+Por padrao, o atributo "_id" e o identificador unico de determinado documento em uma colecao
+
+db.fila.find({"PROPRIEDADE": "VALOR"})
+
+db.fila.update({"PROP":"VAL"},{"PROP":"VAL"}) -- db.COLECAO.update({PROPRIEDADES : VALOR},{PROPRIEDADES: VALOR})
+
+
+
+MONGOENGINE -- Tipo o SQLAlchemy, do que do MONGO
